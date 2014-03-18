@@ -1,0 +1,45 @@
+<%= form_for(@pupil) do |f| %>
+  <% if @pupil.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pupil.errors.count, "error") %> prohibited this pupil from being saved:</h2>
+
+      <ul>
+      <% @pupil.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :given_name %><br>
+    <%= f.text_field :given_name %>
+  </div>
+  <div class="field">
+    <%= f.label :other_name %><br>
+    <%= f.text_field :other_name %>
+  </div>
+  <div class="field">
+    <%= f.label :family_name %><br>
+    <%= f.text_field :family_name %>
+  </div>
+  <div class="field">
+    <%= f.label :name_known_by %><br>
+    <%= f.text_field :name_known_by %>
+  </div>
+  <div class="field">
+    <%= f.label :dob %><br>
+    <%= f.date_select :dob %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.number_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :image_path %><br>
+    <%= f.text_field :image_path %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

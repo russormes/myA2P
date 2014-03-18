@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Given name:</strong>
+  <%= @pupil.given_name %>
+</p>
+
+<p>
+  <strong>Other name:</strong>
+  <%= @pupil.other_name %>
+</p>
+
+<p>
+  <strong>Family name:</strong>
+  <%= @pupil.family_name %>
+</p>
+
+<p>
+  <strong>Name known by:</strong>
+  <%= @pupil.name_known_by %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @pupil.dob %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @pupil.gender %>
+</p>
+
+<p>
+  <strong>Image path:</strong>
+  <%= @pupil.image_path %>
+</p>
+
+<%= link_to 'Edit', edit_pupil_path(@pupil) %> |
+<%= link_to 'Back', pupils_path %>
