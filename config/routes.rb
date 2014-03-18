@@ -1,7 +1,12 @@
 MyA2p::Application.routes.draw do
-  resources :pupils
+  resources :pupils do
+    collection { post :import }
+    collection { post :add_image }
+  end
+  
+  root 'pupils#index'
 
-  # The priority is based upon order of creation: first created -> highest priority.
+  # The priority i based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

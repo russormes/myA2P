@@ -1,4 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A2P | Pupils</title>
+  </head>
+
 <h1>Listing pupils</h1>
+
+<%= flash[:notice] %>
 
 <table>
   <thead>
@@ -33,6 +41,15 @@
     <% end %>
   </tbody>
 </table>
+
+<div>
+<h3>Import Pupils</h3>
+  <%= form_tag import_pupils_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+  <% end %>
+</div>
+
 
 <br>
 

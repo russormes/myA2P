@@ -24,8 +24,15 @@ class PupilsController < ApplicationController
   # POST /pupils
   # POST /pupils.json
   def create
+    uploaded_io = params[:pupil][:image_path]
+    image_pathname = Rails.root.join('public',
+                                        'uploads',
+                                        uploaded_io.original_filename)
+    File.open(image_pathname, 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    params[:pupil][:image_path] = image_pathname.to_s
     @pupil = Pupil.new(pupil_params)
-
     respond_to do |format|
       if @pupil.save
         format.html { redirect_to @pupil, notice: 'Pupil was successfully created.' }
@@ -61,6 +68,24 @@ class PupilsController < ApplicationController
     end
   end
 
+  def import
+    begin
+      Pupil.import(params[:file])
+      redirect_to root_url, notice: "Pupils imported."
+    rescue
+      redirect_to root_url, notice: "Invalid file format."
+    end # end begin. 
+  end # end def import.
+  
+  def upload
+    uploaded_io = params[:pupil][:image_path]
+    File.open(Rails.root.join('public',
+                              'uploads',
+                              uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pupil
@@ -69,6 +94,7 @@ class PupilsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pupil_params
-      params.require(:pupil).permit(:given_name, :other_name, :family_name, :name_known_by, :dob, :gender, :image_path)
+      params.require(:pupil).permit(:given_name, :other_name, :family_name,
+                                    :name_known_by, :dob, :gender, :image_path)
     end
 end
