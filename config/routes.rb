@@ -1,7 +1,6 @@
 MyA2p::Application.routes.draw do
   resources :pupils do
     collection { post :import }
-    collection { post :add_image }
   end
   
   root 'pupils#index'

@@ -24,14 +24,17 @@ class PupilsController < ApplicationController
   # POST /pupils
   # POST /pupils.json
   def create
+    rails_root = Rails.root
     uploaded_io = params[:pupil][:image_path]
-    image_pathname = Rails.root.join('public',
+    image_pathname = rails_root.join('public',
                                         'uploads',
                                         uploaded_io.original_filename)
     File.open(image_pathname, 'wb') do |file|
       file.write(uploaded_io.read)
     end
-    params[:pupil][:image_path] = image_pathname.to_s
+    image_address = image_pathname.to_s.tap{|s| s.slice!(rails_root.to_s)}
+    logger.debug " Image path with slice: #{image_address.inspect}"
+    params[:pupil][:image_path] = image_address
     @pupil = Pupil.new(pupil_params)
     respond_to do |format|
       if @pupil.save
@@ -77,15 +80,6 @@ class PupilsController < ApplicationController
     end # end begin. 
   end # end def import.
   
-  def upload
-    uploaded_io = params[:pupil][:image_path]
-    File.open(Rails.root.join('public',
-                              'uploads',
-                              uploaded_io.original_filename), 'wb') do |file|
-      file.write(uploaded_io.read)
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pupil
