@@ -1,5 +1,8 @@
 # A2p Pupil class definition
 class Pupil < ActiveRecord::Base
+  has_many :pupil_groups
+  has_many :groups, through: :pupil_groups
+  
   validates :given_name, presence: true
   validates :family_name, presence: true
   #validates :image_path, allow_blank: true, url: true

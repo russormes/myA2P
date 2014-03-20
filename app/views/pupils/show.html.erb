@@ -35,5 +35,13 @@
   <%= @pupil.image_path %>
 </p>
 
+<p><strong>Groups</strong><br>
+<% @pupil_groups.each do |pg| %>
+  <div>
+    <%= pg.name %> <br>
+  </div>
+<% end %>
+</p>
+
 <%= link_to 'Edit', edit_pupil_path(@pupil) %> |
 <%= link_to 'Back', pupils_path %>

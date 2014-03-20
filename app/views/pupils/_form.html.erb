@@ -39,6 +39,14 @@
     <%= f.label :image_path %><br>
     <%= f.file_field :image_path %>
   </div>
+  <div class="field">
+    <%= f.label 'Pupil Groups' %><br>
+    <%= collection_select(:groups, :id, @group_list,
+                          :id, :name,
+                          (defined?(@group_selected)).nil? ? { } :
+                                                { :selected => @group_selected },
+                          { :multiple => true }) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -16,6 +16,7 @@ gem 'pg', '0.15.1'
 # gem 'bootstrap-will_paginate', '0.0.9'
 
 group :development, :test do
+  gem "better_errors"
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   # The following optional lines are part of the advanced setup.

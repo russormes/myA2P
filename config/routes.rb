@@ -1,4 +1,6 @@
 MyA2p::Application.routes.draw do
+  resources :groups
+
   resources :pupils do
     collection { post :import }
   end
