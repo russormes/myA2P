@@ -1,6 +1,6 @@
 # A2p Pupil class definition
 class Pupil < ActiveRecord::Base
-  has_many :pupil_groups
+  has_many :pupil_groups, dependent: :destroy
   has_many :groups, through: :pupil_groups
   
   validates :given_name, presence: true
