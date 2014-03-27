@@ -36,7 +36,7 @@ class PupilsController < ApplicationController
       params[:pupil][:image_path] = set_image
     end
     @pupil = Pupil.new(pupil_params)
-    clean_select_multiple_params
+    clean_select_multiple_params params[:groups]
     @pupil_groups = Group.find(params[:groups][:id])
     @pupil.groups = @pupil_groups
     logger.debug "The groups parameter contains: #{params[:groups][:id]}"
@@ -56,7 +56,7 @@ class PupilsController < ApplicationController
   # PATCH/PUT /pupils/1.json
   def update
     respond_to do |format|
-      clean_select_multiple_params
+      clean_select_multiple_params params[:groups]
       @pupil_groups = Group.find(params[:groups][:id])
       @pupil.groups = @pupil_groups
       if (params[:pupil].has_key?(:image_path)) then
